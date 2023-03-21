@@ -12,13 +12,15 @@ public class Main {
 
 	public static void main(String[] args) {
 		Path ubi = Paths.get("C:\\__carpeta\\Argentina Programa\\Java\\Proyectos\\TP\\Prueba\\src\\main\\java\\Recursos\\csvprueba.csv");
-		//System.out.println(ResultadosEnum.ganador.getPuntos());
 		Equipo equipos[] = lectorEquipos(ubi);
-		for(int hola = 0; hola < equipos.length; hola++) 
-			System.out.println(equipos[hola].getNombre());
-			
+		Partido partidos[] = lectorPartidos(ubi);
 		
-		//lectorPartidos(ubi);
+		Ronda ronda = new Ronda(1, equipos, partidos);
+		Participante maria = new Participante (Paths.get("C:\\__carpeta\\Argentina Programa\\Java\\Proyectos\\TP\\Prueba\\src\\main\\java\\Recursos\\pruebaspronostico.csv"));
+		
+		/*for(Pronostico prono : maria.getPronostico())
+			System.out.println(prono.getGanador());*/
+		System.out.println(ronda.ganador(maria));
 		
 
 	}
