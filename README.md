@@ -1,2 +1,2 @@
 # Grupo-4
-Somos Diego Cervantes y Angie Vodosof
+Somos Diego Cervantes y Angie Vodovosoff
