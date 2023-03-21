@@ -1,29 +1,30 @@
 package org.grupo4;
 
 public class Partido {
-	private Equipo equipo[];
+	private int equipoId[];
 	private int goles[];
 	private int id;
 	
-	public Partido(Equipo equipo1, int goles[],Equipo equipo2, int id) {
-		Equipo equipo[] = {equipo1, equipo2}; 
-		this.setEquipo(equipo);
+	public Partido(int equipoId1, int golId1, int golId2,int equipoId2, int id) {
+		int equipo [] = {equipoId1, equipoId2};
+		this.setEquipoId(equipo);
+		int goles[] = {golId1, golId2};
 		this.setGoles(goles);
 		this.setId(id);
 	}
 
 	public int resultado() {
 		if(goles[0] < goles[1])
-			return equipo[1].getId();
+			return equipoId[1];
 		else if(goles[0] > goles[1])
-			return equipo[0].getId();
+			return equipoId[0];
 		else
 			return 0;//indica nadie gano
 			
 	}
 	
-	private void setEquipo(Equipo equipo[]) {
-		this.equipo = equipo;
+	private void setEquipoId(int equipoId[]) {
+		this.equipoId = equipoId;
 	}
 
 	private void setGoles(int goles[]) {

@@ -7,37 +7,44 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Main {
 
 	public static void main(String[] args) {
+		Path ubi = Paths.get("C:\\__carpeta\\Argentina Programa\\Java\\Proyectos\\TP\\Prueba\\src\\main\\java\\Recursos\\csvprueba.csv");
 		//System.out.println(ResultadosEnum.ganador.getPuntos());
-		Equipo equipos[] = lectorEquipos(Paths.get("C:\\__carpeta\\Argentina Programa\\Java\\Proyectos\\TP\\Prueba\\src\\main\\java\\Recursos\\csvprueba.csv"));
+		Equipo equipos[] = lectorEquipos(ubi);
+		for(int hola = 0; hola < equipos.length; hola++) 
+			System.out.println(equipos[hola].getNombre());
+			
 		
-		System.out.println(equipos[1].getNombre());
+		//lectorPartidos(ubi);
 		
-		Equipo equi1 = new Equipo(1, "Argentina");
-		Equipo equi2 = new Equipo(5, "Mexico");
-		int goles[] = {1, 2};
-		Partido prueba = new Partido(equi1, goles, equi2, 2);
-		//System.out.println(prueba.resultado());
 
 	}
 	
 	public static Equipo[] lectorEquipos(Path ubicacion) {
 		int A = 0;
 		int F = 5;
+		int contadorEspecial = 0;
 		try {
 			List<String> texto = Files.readAllLines(ubicacion);
 			//calculamos el numero de equipos que hay y los depuramos
 			String lista[] = new String[texto.size() * 2]; // maxima cantidad de equipos posible
 			for(int fr = 1; fr < texto.size(); fr++) {
 				String aux = texto.get(fr).split(";")[A];
-				if(!Arrays.asList(lista).contains(aux))
-					lista[fr - 1] = aux;
-				aux = texto.get(fr).split(";")[F];
-				if(!Arrays.asList(lista).contains(aux))
-					lista[fr - 1] = aux;
+				if(!Arrays.asList(lista).contains(aux)) {
+					lista[contadorEspecial] = aux;
+					contadorEspecial++;
+				}				
 			}
+			for(int fr = 1; fr < texto.size(); fr++) {
+				String aux = texto.get(fr).split(";")[F];
+				if(!Arrays.asList(lista).contains(aux)) {
+					lista[contadorEspecial] = aux;
+					contadorEspecial++;
+				}	
+			}			
 			//limpia los null de la lista y los convierte en equipo
 			int contador = 0;
 			for (String aux : lista) {
@@ -47,17 +54,21 @@ public class Main {
 			int listaInt[] = new int[contador];
 			for(int aux = 0; aux < contador; aux++)
 				listaInt[aux] = Integer.parseInt(lista[aux]);
-			
 			Equipo equipos[] = new Equipo[contador];
+			
+			int contadorSecundario = 0;
 			for(int aux : listaInt) {
 				for(int fr = 1; fr < texto.size(); fr++) {
 					if(aux == Integer.parseInt(texto.get(fr).split(";")[A])) {
-						equipos[fr - 1] = new Equipo(aux, texto.get(fr).split(";")[A+1]);
+						equipos[contadorSecundario] = new Equipo(aux, texto.get(fr).split(";")[A+1]);
+						fr = texto.size();
 					}
 					else if(aux == Integer.parseInt(texto.get(fr).split(";")[F])) {
-						equipos[fr - 1] = new Equipo(aux, texto.get(fr).split(";")[F+1]);
+						equipos[contadorSecundario] = new Equipo(aux, texto.get(fr).split(";")[F+1]);
+						fr = texto.size();
 					}
 				}
+				contadorSecundario++;
 			}
 			
 			return equipos;
@@ -68,4 +79,20 @@ public class Main {
 		return null;
 	}
 
+	public static Partido[] lectorPartidos(Path ubicacion) {
+		try {
+			List<String> texto = Files.readAllLines(ubicacion);
+			Partido partidos[] = new Partido[texto.size()];
+			
+			for(int fr = 1; fr < texto.size(); fr++) {
+				partidos[fr - 1] = new Partido(Integer.parseInt(texto.get(fr).split(";")[0]), Integer.parseInt(texto.get(fr).split(";")[3]), Integer.parseInt(texto.get(fr).split(";")[4]), Integer.parseInt(texto.get(fr).split(";")[5]), fr);
+			}
+			return partidos;			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
+
