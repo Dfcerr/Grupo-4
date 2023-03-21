@@ -20,7 +20,7 @@ public class Ronda {
 			contador++;
 		}
 		
-		return "El participante " + participante.getNombre() + "hizo un total de " + puntuacion ; 
+		return "El participante " + participante.getNombre() + " hizo un total de " + puntuacion + " puntos"; 
 		
 	}
 	

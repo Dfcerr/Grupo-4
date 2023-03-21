@@ -6,20 +6,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		Path ubi = Paths.get("C:\\__carpeta\\Argentina Programa\\Java\\Proyectos\\TP\\Prueba\\src\\main\\java\\Recursos\\csvprueba.csv");
+		
+		Scanner scn = new Scanner(System.in);
+		
+		System.out.println("Ingrese la ruta con los resultados:");
+		Path ubi = Paths.get(scn.nextLine());
+		
 		Equipo equipos[] = lectorEquipos(ubi);
 		Partido partidos[] = lectorPartidos(ubi);
-		
 		Ronda ronda = new Ronda(1, equipos, partidos);
-		Participante maria = new Participante (Paths.get("C:\\__carpeta\\Argentina Programa\\Java\\Proyectos\\TP\\Prueba\\src\\main\\java\\Recursos\\pruebaspronostico.csv"));
+		System.out.println("cargado correctamente");
 		
-		/*for(Pronostico prono : maria.getPronostico())
-			System.out.println(prono.getGanador());*/
+		System.out.println("Ahora ingrese la ruta de los pronosticos:");
+		Participante maria = new Participante (Paths.get(scn.nextLine()));
+		
 		System.out.println(ronda.ganador(maria));
 		
 
