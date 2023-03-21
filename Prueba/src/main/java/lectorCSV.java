@@ -1,4 +1,4 @@
-
+/*
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ public class lectorCSV {
 			System.out.println(aux);*/
 		
 		//System.out.println(archivo[2][3]);
-		
+/*		
 	}
 	public static String[][] lectorLista(Path directorio) {
 		try {
@@ -46,4 +46,4 @@ public class lectorCSV {
 		}
 		return null;
 	}
-}
+}*/
