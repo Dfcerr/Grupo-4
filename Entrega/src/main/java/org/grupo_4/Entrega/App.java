@@ -18,11 +18,29 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		Scanner scn = new Scanner(System.in);
 		
-		System.out.println("Ingrese la ruta con los resultados:");
-		Path ubi = Paths.get(scn.nextLine());
+		//Parte a trabajar, RUTA DE LOS RESULTADOS
+		String rutarelativa = "src\\main\\java\\org\\grupo_4\\Entrega\\models\\ResultadosEnum.java";
+		Path pathrelativo = Paths.get(rutarelativa);
 		
+		//acá lee las líneas
+		try {
+			for(String linea:Files.readAllLines(pathrelativo)) {
+				System.out.println(linea);
+				
+			}
+
+		}catch(IOException e) {
+			e.printStackTrace();
+			
+		}
+
+
+		Path ubi = pathrelativo.toAbsolutePath();
+		
+		
+		
+		//acá termina 
 		Equipo equipos[] = lectorEquipos(ubi);
 		Partido partidos[] = lectorPartidos(ubi);
 		Ronda ronda = new Ronda(1, equipos, partidos);
