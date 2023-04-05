@@ -20,7 +20,7 @@ public class App {
 		
 		
 		//Parte a trabajar, RUTA DE LOS RESULTADOS
-		String rutarelativa = "src\\main\\java\\org\\grupo_4\\Entrega\\models\\ResultadosEnum.java";
+		String rutarelativa = "src\\main\\resources\\Pronóstico.csv";
 		Path pathrelativo = Paths.get(rutarelativa);
 		
 		//acá lee las líneas
